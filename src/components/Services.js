@@ -3,9 +3,30 @@ import { motion } from 'framer-motion';
 
 const Services = () => {
   const services = [
-    { title: 'Web Development', description: 'Responsive and modern websites.' },
-    { title: 'Mobile Development', description: 'Apps for both iOS and Android.' },
-    { title: 'Cloud Services', description: 'Cloud architecture and consulting.' },
+    { 
+      title: 'Web Development', 
+      description: 'We create responsive, modern websites that are optimized for performance and usability. Whether you need a personal blog or a complex e-commerce platform, we have you covered.' 
+    },
+    { 
+      title: 'Java Development', 
+      description: 'Specialized in building scalable and efficient Java applications. Our expertise ranges from enterprise software solutions to Android apps, ensuring robust and reliable results.' 
+    },
+    { 
+      title: 'Robotics', 
+      description: 'From automation systems to intelligent robots, we provide cutting-edge robotics solutions that enhance productivity and innovation in various industries.' 
+    },
+    { 
+      title: 'UI/UX Design', 
+      description: 'Creating intuitive and engaging user experiences through meticulous UI/UX design. We focus on both aesthetics and functionality to ensure the best user interaction.' 
+    },
+    { 
+      title: 'Digital Marketing', 
+      description: 'Comprehensive digital marketing services, including SEO, social media management, and content marketing, to help your business reach its target audience effectively.' 
+    },
+    { 
+      title: 'Data Analysis & AI', 
+      description: 'Leveraging data analytics and AI to provide actionable insights and automate decision-making processes. Our solutions help businesses optimize operations and drive growth.' 
+    },
   ];
 
   return (
