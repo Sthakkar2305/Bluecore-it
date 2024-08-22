@@ -5,3 +5,8 @@
     line-height: 5.5rem; /* 88px */
   }
 }
+ #home {
+  background-image: url('/src/components/3757c30a762387b\ \(2\).jpg'); /* Adjust path as needed */
+  background-size: cover;
+  background-position: center;
+} 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import './style.css';
 
 const Home = () => {
   return (
@@ -10,8 +11,14 @@ const Home = () => {
         transition={{ duration: 1 }} 
         className="text-center"
       >
-        <h1 className="text-5xl font-extrabold leading-tight tracking-tight text-gray-800">Welcome to Bluecore IT</h1>
-        <p className="text-lg mt-4 text-gray-600">Innovative Solutions for Your Business Growth</p>
+      <h1 className="text-5xl font-extrabold leading-tight tracking-tight text-white hover:text-gray-300 transition-colors duration-300">
+  Welcome to Bluecore IT
+</h1>
+<p className="text-lg mt-4 text-white hover:text-gray-300 transition-colors duration-300">
+  Innovative Solutions for Your Business Growth
+</p>
+
+
         <motion.a 
           href="#about"
           whileHover={{ scale: 1.05 }}
