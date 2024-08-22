@@ -12,20 +12,20 @@ const Services = () => {
       description: 'Specialized in building scalable and efficient Java applications. Our expertise ranges from enterprise software solutions to Android apps, ensuring robust and reliable results.' 
     },
     { 
-      title: 'Robotics', 
-      description: 'From automation systems to intelligent robots, we provide cutting-edge robotics solutions that enhance productivity and innovation in various industries.' 
+      title: 'IoT & Hardware Design', 
+      description: 'From smart devices to custom hardware solutions, we provide comprehensive IoT and hardware design services to bring your ideas to life and enhance connectivity.' 
     },
     { 
       title: 'UI/UX Design', 
       description: 'Creating intuitive and engaging user experiences through meticulous UI/UX design. We focus on both aesthetics and functionality to ensure the best user interaction.' 
     },
     { 
-      title: 'Digital Marketing', 
-      description: 'Comprehensive digital marketing services, including SEO, social media management, and content marketing, to help your business reach its target audience effectively.' 
+      title: 'Embedded Engineering', 
+      description: 'Specializing in the development of embedded systems, we create reliable and efficient solutions that integrate software and hardware to meet specific requirements.' 
     },
     { 
-      title: 'Data Analysis & AI', 
-      description: 'Leveraging data analytics and AI to provide actionable insights and automate decision-making processes. Our solutions help businesses optimize operations and drive growth.' 
+      title: 'Graphic Design', 
+      description: 'Offering creative graphic design services that bring your brand’s vision to life. From logos to complete branding, we ensure visual appeal and consistency across all platforms.' 
     },
   ];
 

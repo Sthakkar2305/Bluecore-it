@@ -4,8 +4,9 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-white shadow-md fixed w-full top-0 z-10">
+    <nav className="bg-white shadow-md fixed w-full top-0 z-10" style={{ backgroundImage: "url('/3757c30a762387b (2).jpg')" }}>
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+        {/* Brand Logo */}
         <div className="text-xl font-bold text-gray-800">Bluecore IT</div>
 
         {/* Hamburger Icon for Mobile */}
@@ -24,8 +25,8 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Navbar Links */}
-        <div className={`md:flex items-center space-x-6 ${isOpen ? "block" : "hidden"} md:block`}>
+        {/* Navbar Links for Desktop */}
+        <div className="hidden md:flex space-x-6">
           <a href="#home" className="text-gray-600 hover:text-gray-800">Home</a>
           <a href="#about" className="text-gray-600 hover:text-gray-800">About</a>
           <a href="#services" className="text-gray-600 hover:text-gray-800">Services</a>
