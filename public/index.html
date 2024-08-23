@@ -40,42 +40,61 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-    <div id="consultancyPopup" class="popup">
-      <div class="popup-content">
-        <span class="close-btn">&times;</span>
-        <h2>Get Free Consultancy</h2>
-        <p>Sign up now for a free consultancy session with our experts. Fill out the form below:</p>
-        <form>
-          <input type="text" placeholder="Your Name" required>
-          <input type="email" placeholder="Your Email" required>
-          <textarea placeholder="Your Message" required></textarea>
-          <button type="submit">Submit</button>
-        </form>
+    <body>
+      <div id="consultancy-popup" class="popup">
+        <div class="popup-content">
+          <h2>Free Consultancy</h2>
+          <p>Get in touch with us for a free consultation!</p>
+          <input type="text" id="name" placeholder="Your Name" />
+          <input type="email" id="email" placeholder="Your Email" />
+          <textarea id="message" placeholder="Your Message"></textarea>
+          <div class="popup-buttons">
+            <button onclick="validateAndMove()">Get Consultation</button>
+            <button onclick="cancelPopup()">Cancel</button>
+          </div>
+        </div>
       </div>
-    </div>
+      
+      <script>
+        function validateAndMove() {
+          var name = document.getElementById('name').value.trim();
+          var email = document.getElementById('email').value.trim();
+          var message = document.getElementById('message').value.trim();
+          var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        
+          if (name.length >= 2 && emailPattern.test(email) && message.length > 0) {
+            // Check if contact form elements exist before setting their values
+            var contactName = document.getElementById('contact-name');
+            var contactEmail = document.getElementById('contact-email');
+            var contactMessage = document.getElementById('contact-message');
+        
+            if (contactName && contactEmail && contactMessage) {
+              contactName.value = name;
+              contactEmail.value = email;
+              contactMessage.value = message;
+        
+              // Hide the popup
+              document.getElementById('consultancy-popup').style.display = 'none';
+        
+              // Scroll to the contact form
+              document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+            } else {
+              console.error('Contact form elements not found.');
+            }
+          } else {
+            alert('Please enter a valid name, email address, and message.');
+          }
+        }
+        function cancelPopup() {
+          document.getElementById('consultancy-popup').style.display = 'none';
+        }
+        
+        // Attach to the global window object
+        window.cancelPopup = cancelPopup;
+        
+        
+      </script>
+    </body>
     
-    
-  </body>
-  <script>
-   // Show the popup after a delay (5 seconds)
-window.onload = function() {
-  setTimeout(function() {
-    document.getElementById('consultancyPopup').style.display = 'flex';
-  }, 5000); // You can adjust this timing
-};
+  </html>
 
-// Close the popup when the close button is clicked
-document.querySelector('.close-btn').onclick = function() {
-  document.getElementById('consultancyPopup').style.display = 'none';
-};
-
-// Close the popup if the user clicks outside of the pop-up content
-window.onclick = function(event) {
-  if (event.target == document.getElementById('consultancyPopup')) {
-    document.getElementById('consultancyPopup').style.display = 'none';
-  }
-};
-
-
-  </script>
-</html>
