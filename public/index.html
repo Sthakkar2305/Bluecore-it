@@ -15,6 +15,7 @@
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="stylesheet" href="styles.css">
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -24,7 +25,7 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <title>Bluecore It</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -39,5 +40,39 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <div id="consultancyPopup" class="popup">
+      <div class="popup-content">
+        <span class="close-btn">&times;</span>
+        <h2>Free Consultancy</h2>
+        <p>Sign up for a free consultancy session with our experts!</p>
+        <form>
+          <input type="text" placeholder="Your Name" required>
+          <input type="email" placeholder="Your Email" required>
+          <button type="submit">Sign Up</button>
+        </form>
+      </div>
+    </div>
+    
   </body>
+  <script>
+    // Show the popup after a delay
+window.onload = function() {
+  setTimeout(function() {
+    document.getElementById('consultancyPopup').style.display = 'flex';
+  }, 5000); // Adjust the delay as needed
+};
+
+// Close the popup when the close button is clicked
+document.querySelector('.close-btn').onclick = function() {
+  document.getElementById('consultancyPopup').style.display = 'none';
+};
+
+// Close the popup if the user clicks outside of it
+window.onclick = function(event) {
+  if (event.target == document.getElementById('consultancyPopup')) {
+    document.getElementById('consultancyPopup').style.display = 'none';
+  }
+};
+
+  </script>
 </html>
