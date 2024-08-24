@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+// import { motion } from 'framer-motion';
 import Home from './components/Home';
 import About from './components/About';
 import Services from './components/Services';

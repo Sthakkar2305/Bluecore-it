@@ -6,22 +6,22 @@ const Contact = () => {
   const [showPopup, setShowPopup] = useState(false); // State for controlling pop-up visibility
   const formRef = useRef(null);
 
-  // UseEffect to listen for updates from the popup
   useEffect(() => {
     const handleUpdateForm = (event) => {
       const { name, email, message } = event.detail;
       setFormData({ name, email, message });
     };
 
-    const formElement = formRef.current;
-    if (formElement) {
-      formElement.addEventListener('updateForm', handleUpdateForm);
-    }
+    const handleFormEvent = (event) => {
+      if (event.type === 'updateForm') {
+        handleUpdateForm(event);
+      }
+    };
+
+    window.addEventListener('updateForm', handleFormEvent);
 
     return () => {
-      if (formElement) {
-        formElement.removeEventListener('updateForm', handleUpdateForm);
-      }
+      window.removeEventListener('updateForm', handleFormEvent);
     };
   }, []);
 

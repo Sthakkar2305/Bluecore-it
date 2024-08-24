@@ -68,43 +68,31 @@
       function showPopup() {
         document.getElementById('consultancy-popup').style.display = 'flex';
       }
-  
+    
       function validateAndMove() {
         var name = document.getElementById('name').value.trim();
         var email = document.getElementById('email').value.trim();
         var message = document.getElementById('message').value.trim();
         var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  
+    
         if (name.length >= 2 && emailPattern.test(email) && message.length > 0) {
-          var contactName = document.getElementById('contact-name');
-          var contactEmail = document.getElementById('contact-email');
-          var contactMessage = document.getElementById('contact-message');
-  
-          if (contactName && contactEmail && contactMessage) {
-            contactName.value = name;
-            contactEmail.value = email;
-            contactMessage.value = message;
-  
-            // Hide the popup
-            document.getElementById('consultancy-popup').style.display = 'none';
-  
-            // Scroll to the contact form
-            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-          } else {
-            console.error('Contact form elements not found.');
-          }
+          var event = new CustomEvent('updateForm', { detail: { name, email, message } });
+          window.dispatchEvent(event);
+    
+          // Hide the popup
+          document.getElementById('consultancy-popup').style.display = 'none';
+    
+          // Scroll to the contact form
+          document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
         } else {
           alert('Please enter a valid name, email address, and message.');
         }
       }
-  
+    
       function cancelPopup() {
         document.getElementById('consultancy-popup').style.display = 'none';
       }
-  
-      // Attach to the global window object
-      window.cancelPopup = cancelPopup;
     </script>
-  </body>
+      </body>
   </html>
 
