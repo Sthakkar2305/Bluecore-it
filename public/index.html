@@ -16,6 +16,7 @@
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -40,61 +41,70 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-    <body>
-      <div id="consultancy-popup" class="popup">
-        <div class="popup-content">
-          <h2>Free Consultancy</h2>
-          <p>Get in touch with us for a free consultation!</p>
-          <input type="text" id="name" placeholder="Your Name" />
-          <input type="email" id="email" placeholder="Your Email" />
-          <textarea id="message" placeholder="Your Message"></textarea>
-          <div class="popup-buttons">
-            <button onclick="validateAndMove()">Get Consultation</button>
-            <button onclick="cancelPopup()">Cancel</button>
-          </div>
+  </head>
+  <body>
+  
+    <!-- Button to trigger the popup -->
+    <button class="consultancy-button" onclick="showPopup()">
+      <i class="fas fa-comments"></i> <span class="button-text">Free Consultancy</span>
+    </button>
+  
+    <!-- Popup content -->
+    <div id="consultancy-popup" class="popup">
+      <div class="popup-content">
+        <h2>Free Consultancy</h2>
+        <p>Get in touch with us for a free consultation!</p>
+        <input type="text" id="name" placeholder="Your Name" />
+        <input type="email" id="email" placeholder="Your Email" />
+        <textarea id="message" placeholder="Your Message"></textarea>
+        <div class="popup-buttons">
+          <button onclick="validateAndMove()">Get Consultation</button>
+          <button onclick="cancelPopup()">Cancel</button>
         </div>
       </div>
-      
-      <script>
-        function validateAndMove() {
-          var name = document.getElementById('name').value.trim();
-          var email = document.getElementById('email').value.trim();
-          var message = document.getElementById('message').value.trim();
-          var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        
-          if (name.length >= 2 && emailPattern.test(email) && message.length > 0) {
-            // Check if contact form elements exist before setting their values
-            var contactName = document.getElementById('contact-name');
-            var contactEmail = document.getElementById('contact-email');
-            var contactMessage = document.getElementById('contact-message');
-        
-            if (contactName && contactEmail && contactMessage) {
-              contactName.value = name;
-              contactEmail.value = email;
-              contactMessage.value = message;
-        
-              // Hide the popup
-              document.getElementById('consultancy-popup').style.display = 'none';
-        
-              // Scroll to the contact form
-              document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-            } else {
-              console.error('Contact form elements not found.');
-            }
+    </div>
+  
+    <script>
+      function showPopup() {
+        document.getElementById('consultancy-popup').style.display = 'flex';
+      }
+  
+      function validateAndMove() {
+        var name = document.getElementById('name').value.trim();
+        var email = document.getElementById('email').value.trim();
+        var message = document.getElementById('message').value.trim();
+        var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  
+        if (name.length >= 2 && emailPattern.test(email) && message.length > 0) {
+          var contactName = document.getElementById('contact-name');
+          var contactEmail = document.getElementById('contact-email');
+          var contactMessage = document.getElementById('contact-message');
+  
+          if (contactName && contactEmail && contactMessage) {
+            contactName.value = name;
+            contactEmail.value = email;
+            contactMessage.value = message;
+  
+            // Hide the popup
+            document.getElementById('consultancy-popup').style.display = 'none';
+  
+            // Scroll to the contact form
+            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
           } else {
-            alert('Please enter a valid name, email address, and message.');
+            console.error('Contact form elements not found.');
           }
+        } else {
+          alert('Please enter a valid name, email address, and message.');
         }
-        function cancelPopup() {
-          document.getElementById('consultancy-popup').style.display = 'none';
-        }
-        
-        // Attach to the global window object
-        window.cancelPopup = cancelPopup;
-        
-        
-      </script>
-    </body>
-    
+      }
+  
+      function cancelPopup() {
+        document.getElementById('consultancy-popup').style.display = 'none';
+      }
+  
+      // Attach to the global window object
+      window.cancelPopup = cancelPopup;
+    </script>
+  </body>
   </html>
 

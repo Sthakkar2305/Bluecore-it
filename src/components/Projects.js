@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-
+import ecommerceimage from '../components/Screenshot 2024-03-06 101019.png';
+import votingimage from '../components/WhatsApp Image 2024-08-24 at 2.02.25 PM.jpeg';
 const Projects = () => {
   const projects = [
     {
@@ -11,12 +12,17 @@ const Projects = () => {
     {
       title: 'E-commerce Website',
       description: 'A digital platform that enables businesses to sell products and services online. It provides a user-friendly interface where customers can browse through various categories, view detailed product descriptions, and make purchases securely.',
-      image: 'https://th.bing.com/th/id/OIP.U6wBcBxBMWsoN_-lGjivMgHaFp?rs=1&pid=ImgDetMain',
+      image: ecommerceimage,
     },
     {
       title: 'Duct Cleaning Electric Robot',
       description: 'A specialized device designed to navigate through air ducts and clean them efficiently. Equipped with advanced sensors, cameras, and remote control systems, these robots can remove dust, debris, allergens, and contaminants with precision.',
       image: 'https://www.hasman.co.uk/wp-content/uploads/2020/02/Lifa-Electric-Robot.png',
+    },
+    {
+      title: 'AI-Based Electronics Voting Machine',
+      description: 'An innovative electronic voting system powered by artificial intelligence, designed to provide secure, efficient, and transparent voting experiences. The machine uses AI algorithms to ensure accuracy and prevent fraud during elections.',
+      image: votingimage,
     },
   ];
 
@@ -50,7 +56,6 @@ const Projects = () => {
                 className="w-full h-40 md:h-60 object-cover rounded-md"
               />
               <h3 className="text-lg md:text-xl font-bold mt-4">{project.title}</h3>
-              {/* <p className="text-gray-700 mt-2 text-sm md:text-base">{project.description}</p> */}
               <button
                 aria-expanded={activeIndex === index}
                 className="mt-4 bg-blue-500 text-white px-4 py-2 text-sm md:text-base rounded hover:bg-blue-600"
