@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 const Contact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [showPopup, setShowPopup] = useState(false); // State for controlling pop-up visibility
+  const [loading, setLoading] = useState(false); // State for controlling loader visibility
   const formRef = useRef(null);
 
   useEffect(() => {
@@ -27,8 +28,7 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log('Form Data Submitted:', formData);
+    setLoading(true); // Show the loader
     sendEmail(formData);
   };
 
@@ -53,6 +53,7 @@ const Contact = () => {
       });
 
       const result = await response.json();
+      setLoading(false); // Hide the loader
       if (result.success) {
         console.log("Email sent successfully:", result);
         setShowPopup(true); // Show the pop-up
@@ -63,6 +64,7 @@ const Contact = () => {
         console.error("Error sending email:", result);
       }
     } catch (error) {
+      setLoading(false); // Hide the loader in case of error
       console.error("Form submission error:", error);
     }
   };
@@ -135,8 +137,35 @@ const Contact = () => {
             type="submit"
             whileHover={{ scale: 1.05 }}
             className="w-full bg-gray-800 text-white py-3 rounded font-semibold shadow-md hover:bg-gray-700 transition-colors"
+            disabled={loading} // Disable button while loading
           >
-            Send Message
+            {loading ? (
+              <div className="flex justify-center items-center">
+                <svg
+                  className="animate-spin h-5 w-5 mr-3 text-white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                  ></path>
+                </svg>
+                Sending...
+              </div>
+            ) : (
+              "Send Message"
+            )}
           </motion.button>
         </motion.form>
 

@@ -27,9 +27,17 @@ const About = () => {
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
           >
-            <p className="text-base md:text-lg text-gray-600 leading-relaxed">
-              At Bluecore IT, we offer cutting-edge IT solutions designed to drive your business forward in the digital age. Our expertise spans web development, mobile applications, and cloud services, all tailored to meet your specific needs. Partner with us to achieve seamless digital transformation and operational excellence.
-            </p>
+         <p className="text-base md:text-lg text-gray-600 leading-relaxed">
+  At Bluecore IT, we provide a comprehensive range of services to meet your technology needs. 
+  From <span className="font-semibold">Web Development</span> that ensures your online presence is modern and responsive, 
+  to <span className="font-semibold">Java Development</span> for building scalable enterprise applications. 
+  We specialize in <span className="font-semibold">IoT & Hardware Design</span> to bring innovative connected devices to life, 
+  and <span className="font-semibold">UI/UX Design</span> that creates intuitive and engaging user experiences. 
+  Our <span className="font-semibold">Embedded Engineering</span> services ensure your hardware and software work seamlessly together, 
+  while our <span className="font-semibold">Graphic Design</span> capabilities help your brand stand out with visually appealing and consistent branding.
+  Partner with Bluecore IT to drive your business forward with our tailored IT solutions.
+</p>
+
           </motion.div>
         </div>
       </div>
