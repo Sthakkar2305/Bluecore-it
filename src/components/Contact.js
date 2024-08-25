@@ -105,6 +105,7 @@ const Contact = () => {
               name="name"
               className="w-full p-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               placeholder="Your Name"
+              required
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             />
@@ -117,6 +118,7 @@ const Contact = () => {
               name="email"
               className="w-full p-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               placeholder="Your Email"
+              required
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             />
@@ -129,6 +131,7 @@ const Contact = () => {
               className="w-full p-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               placeholder="Your Message"
               rows="4"
+              required
               value={formData.message}
               onChange={(e) => setFormData({ ...formData, message: e.target.value })}
             />
