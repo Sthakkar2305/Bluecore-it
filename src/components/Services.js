@@ -6,7 +6,7 @@ const Services = () => {
   const services = [
     { 
       title: 'Web Development', 
-      description: 'We create responsive, modern websites that are optimized for performance and usability. Whether you need a personal blog, a corporate website, or a complex e-commerce platform, our team ensures your online presence is engaging and effective. We focus on clean code, SEO best practices, and mobile-friendly designs to help you reach your audience across all devices.', 
+      description: 'We create responsive, modern websites that are optimized for performance and usability. Whether you need a personal blog, a corporate website, or a complex e-commerce platform, our team ensures your online presence is engaging and effective. We focus on clean code, and mobile-friendly designs to help you reach your audience across all devices.', 
       icon: <FaCode />
     },
     { 
@@ -52,7 +52,7 @@ const Services = () => {
             <motion.div 
               key={index} 
               className="relative bg-white p-6 rounded-lg shadow-lg flex flex-col items-center justify-between transform transition-transform hover:scale-105"
-              style={{ height: 'auto', minHeight: '320px' }}
+              style={{ height: '320px', width: '320px' }}
               whileHover={{ y: -10 }}
             >
               <div className="flex flex-col items-center text-center">

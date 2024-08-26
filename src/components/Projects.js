@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import ecommerceimage from '../components/Screenshot 2024-03-06 101019.png';
 import votingimage from '../components/WhatsApp Image 2024-08-24 at 2.02.25 PM.jpeg';
+
 const Projects = () => {
   const projects = [
     {
@@ -50,11 +51,13 @@ const Projects = () => {
               className="bg-white p-4 md:p-6 rounded-lg shadow-lg transition-all duration-500"
               whileHover={{ scale: 1.05 }}
             >
-              <img
-                src={project.image}
-                alt={project.title}
-                className="w-full h-40 md:h-60 object-cover rounded-md"
-              />
+              <div className="w-full h-60 md:h-60 flex justify-center items-center overflow-hidden">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="object-cover h-full w-full"
+                />
+              </div>
               <h3 className="text-lg md:text-xl font-bold mt-4">{project.title}</h3>
               <button
                 aria-expanded={activeIndex === index}
