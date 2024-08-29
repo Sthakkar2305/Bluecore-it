@@ -2,15 +2,20 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 
 const Contact = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+  });
   const [showPopup, setShowPopup] = useState(false); // State for controlling pop-up visibility
   const [loading, setLoading] = useState(false); // State for controlling loader visibility
   const formRef = useRef(null);
 
   useEffect(() => {
     const handleUpdateForm = (event) => {
-      const { name, email, message } = event.detail;
-      setFormData({ name, email, message });
+      const { name, email, subject, message } = event.detail;
+      setFormData({ name, email, subject, message });
     };
 
     const handleFormEvent = (event) => {
@@ -33,39 +38,38 @@ const Contact = () => {
   };
 
   const sendEmail = async (formData) => {
-    const { name, email, message } = formData;
-
-    const data = {
-      access_key: "4fee3512-399f-4941-8c50-f4a4f491574a", // Your Web3Forms access key
-      name,
-      email,
-      message,
-    };
-
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
+      const response = await fetch('https://recive-mail.vercel.app/send-email', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(formData),
       });
 
       const result = await response.json();
       setLoading(false); // Hide the loader
+
       if (result.success) {
-        console.log("Email sent successfully:", result);
+        console.log('Email sent successfully:', result);
         setShowPopup(true); // Show the pop-up
         setTimeout(() => {
           setShowPopup(false); // Hide the pop-up after 3 seconds
         }, 3000);
+        // Optionally reset the form after successful submission
+        setFormData({
+          name: '',
+          email: '',
+          subject: '',
+          message: '',
+        });
       } else {
-        console.error("Error sending email:", result);
+        alert('Failed to send mail. Please try again.');
       }
     } catch (error) {
       setLoading(false); // Hide the loader in case of error
-      console.error("Form submission error:", error);
+      console.error('Form submission error:', error);
+      alert('An error occurred while sending the mail. Please try again.');
     }
   };
 
@@ -88,7 +92,7 @@ const Contact = () => {
         >
           We would love to hear from you! Whether you have a question or need further information about our services, feel free to reach out.
         </motion.p>
-        
+
         <motion.form
           ref={formRef}
           initial={{ opacity: 0 }}
@@ -101,7 +105,7 @@ const Contact = () => {
             <label className="block text-gray-700 text-sm font-bold mb-2">Name</label>
             <input
               type="text"
-              id="contact-name"  
+              id="contact-name"
               name="name"
               className="w-full p-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               placeholder="Your Name"
@@ -114,7 +118,7 @@ const Contact = () => {
             <label className="block text-gray-700 text-sm font-bold mb-2">Email</label>
             <input
               type="email"
-              id="contact-email"  
+              id="contact-email"
               name="email"
               className="w-full p-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               placeholder="Your Email"
@@ -124,9 +128,22 @@ const Contact = () => {
             />
           </div>
           <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2">Subject</label>
+            <input
+              type="text"
+              id="contact-subject"
+              name="subject"
+              className="w-full p-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              placeholder="Subject"
+              required
+              value={formData.subject}
+              onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+            />
+          </div>
+          <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">Message</label>
             <textarea
-              id="contact-message"  
+              id="contact-message"
               name="message"
               className="w-full p-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               placeholder="Your Message"
@@ -167,7 +184,7 @@ const Contact = () => {
                 Sending...
               </div>
             ) : (
-              "Send Message"
+              'Send Message'
             )}
           </motion.button>
         </motion.form>
