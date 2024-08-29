@@ -6,10 +6,10 @@ const Contact = () => {
     name: '',
     email: '',
     subject: '',
-    message: '',
+    message: ''
   });
-  const [showPopup, setShowPopup] = useState(false); // State for controlling pop-up visibility
-  const [loading, setLoading] = useState(false); // State for controlling loader visibility
+  const [showPopup, setShowPopup] = useState(false);
+  const [loading, setLoading] = useState(false);
   const formRef = useRef(null);
 
   useEffect(() => {
@@ -31,45 +31,56 @@ const Contact = () => {
     };
   }, []);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setLoading(true); // Show the loader
-    sendEmail(formData);
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
   };
 
-  const sendEmail = async (formData) => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
     try {
       const response = await fetch('https://recive-mail.vercel.app/send-email', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(formData)
       });
 
+      if (!response.ok) {
+        // Handle non-200 responses
+        const errorText = await response.text();
+        throw new Error(`Server responded with status ${response.status}: ${errorText}`);
+      }
+
       const result = await response.json();
-      setLoading(false); // Hide the loader
+      console.log("Response:", result); // Log the response
 
       if (result.success) {
-        console.log('Email sent successfully:', result);
-        setShowPopup(true); // Show the pop-up
+        console.log("Email sent successfully:", result);
+        setShowPopup(true);
         setTimeout(() => {
-          setShowPopup(false); // Hide the pop-up after 3 seconds
+          setShowPopup(false);
         }, 3000);
-        // Optionally reset the form after successful submission
         setFormData({
           name: '',
           email: '',
           subject: '',
-          message: '',
+          message: ''
         });
       } else {
-        alert('Failed to send mail. Please try again.');
+        console.error("Error sending email:", result);
+        alert(`Failed to send mail. Response: ${JSON.stringify(result)}`);
       }
     } catch (error) {
-      setLoading(false); // Hide the loader in case of error
-      console.error('Form submission error:', error);
+      console.error("Network or fetch error:", error);
       alert('An error occurred while sending the mail. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -92,7 +103,6 @@ const Contact = () => {
         >
           We would love to hear from you! Whether you have a question or need further information about our services, feel free to reach out.
         </motion.p>
-
         <motion.form
           ref={formRef}
           initial={{ opacity: 0 }}
@@ -111,7 +121,7 @@ const Contact = () => {
               placeholder="Your Name"
               required
               value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              onChange={handleChange}
             />
           </div>
           <div className="mb-4">
@@ -124,7 +134,7 @@ const Contact = () => {
               placeholder="Your Email"
               required
               value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              onChange={handleChange}
             />
           </div>
           <div className="mb-4">
@@ -135,9 +145,8 @@ const Contact = () => {
               name="subject"
               className="w-full p-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               placeholder="Subject"
-              required
               value={formData.subject}
-              onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+              onChange={handleChange}
             />
           </div>
           <div className="mb-4">
@@ -150,7 +159,7 @@ const Contact = () => {
               rows="4"
               required
               value={formData.message}
-              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+              onChange={handleChange}
             />
           </div>
           <motion.button
@@ -184,7 +193,7 @@ const Contact = () => {
                 Sending...
               </div>
             ) : (
-              'Send Message'
+              "Send Message"
             )}
           </motion.button>
         </motion.form>
