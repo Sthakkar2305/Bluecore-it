@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
 const Contact = () => {
@@ -9,27 +9,6 @@ const Contact = () => {
     message: ''
   });
   const [showPopup, setShowPopup] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const formRef = useRef(null);
-
-  useEffect(() => {
-    const handleUpdateForm = (event) => {
-      const { name, email, subject, message } = event.detail;
-      setFormData({ name, email, subject, message });
-    };
-
-    const handleFormEvent = (event) => {
-      if (event.type === 'updateForm') {
-        handleUpdateForm(event);
-      }
-    };
-
-    window.addEventListener('updateForm', handleFormEvent);
-
-    return () => {
-      window.removeEventListener('updateForm', handleFormEvent);
-    };
-  }, []);
 
   const handleChange = (e) => {
     setFormData({
@@ -38,49 +17,38 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
+  const handlePopupChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
 
-    try {
-      const response = await fetch('https://recive-mail.vercel.app/send-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-      });
+  const handlePopupOpen = () => {
+    setShowPopup(true);
+  };
 
-      if (!response.ok) {
-        // Handle non-200 responses
-        const errorText = await response.text();
-        throw new Error(`Server responded with status ${response.status}: ${errorText}`);
-      }
+  const handlePopupClose = () => {
+    setShowPopup(false);
+  };
 
-      const result = await response.json();
-      console.log("Response:", result); // Log the response
+  const handlePopupSubmit = () => {
+    const { name, email, message } = formData;
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-      if (result.success) {
-        console.log("Email sent successfully:", result);
-        setShowPopup(true);
-        setTimeout(() => {
-          setShowPopup(false);
-        }, 3000);
-        setFormData({
-          name: '',
-          email: '',
-          subject: '',
-          message: ''
-        });
-      } else {
-        console.error("Error sending email:", result);
-        alert(`Failed to send mail. Response: ${JSON.stringify(result)}`);
-      }
-    } catch (error) {
-      console.error("Network or fetch error:", error);
-      alert('An error occurred while sending the mail. Please try again.');
-    } finally {
-      setLoading(false);
+    if (name.length >= 2 && emailPattern.test(email) && message.length > 0) {
+      // Hide the popup
+      setShowPopup(false);
+      
+      // Scroll to the contact form
+      document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+      
+      // Automatically update the contact form fields
+      document.getElementById('name').value = name;
+      document.getElementById('email').value = email;
+      document.getElementById('message').value = message;
+    } else {
+      alert('Please enter a valid name, email address, and message.');
     }
   };
 
@@ -104,18 +72,18 @@ const Contact = () => {
           We would love to hear from you! Whether you have a question or need further information about our services, feel free to reach out.
         </motion.p>
         <motion.form
-          ref={formRef}
+          action="https://recive-mail.vercel.app/send-email"
+          method="POST"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
           className="mt-10 max-w-lg mx-auto bg-white shadow-md rounded-lg p-8"
-          onSubmit={handleSubmit}
         >
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">Name</label>
+            <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">Name</label>
             <input
               type="text"
-              id="contact-name"
+              id="name"
               name="name"
               className="w-full p-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               placeholder="Your Name"
@@ -125,10 +93,10 @@ const Contact = () => {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">Email</label>
+            <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">Your Email</label>
             <input
               type="email"
-              id="contact-email"
+              id="email"
               name="email"
               className="w-full p-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               placeholder="Your Email"
@@ -138,21 +106,22 @@ const Contact = () => {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">Subject</label>
+            <label htmlFor="subject" className="block text-gray-700 text-sm font-bold mb-2">Subject</label>
             <input
               type="text"
-              id="contact-subject"
+              id="subject"
               name="subject"
               className="w-full p-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               placeholder="Subject"
+              required
               value={formData.subject}
               onChange={handleChange}
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">Message</label>
+            <label htmlFor="message" className="block text-gray-700 text-sm font-bold mb-2">Message</label>
             <textarea
-              id="contact-message"
+              id="message"
               name="message"
               className="w-full p-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               placeholder="Your Message"
@@ -160,54 +129,64 @@ const Contact = () => {
               required
               value={formData.message}
               onChange={handleChange}
-            />
+            ></textarea>
           </div>
           <motion.button
             type="submit"
             whileHover={{ scale: 1.05 }}
             className="w-full bg-gray-800 text-white py-3 rounded font-semibold shadow-md hover:bg-gray-700 transition-colors"
-            disabled={loading} // Disable button while loading
           >
-            {loading ? (
-              <div className="flex justify-center items-center">
-                <svg
-                  className="animate-spin h-5 w-5 mr-3 text-white"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <circle
-                    className="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                  ></circle>
-                  <path
-                    className="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
-                  ></path>
-                </svg>
-                Sending...
-              </div>
-            ) : (
-              "Send Message"
-            )}
+            Send Message
           </motion.button>
         </motion.form>
+      </div>
 
-        {/* Pop-up */}
-        {showPopup && (
-          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-            <div className="bg-white p-6 rounded shadow-lg">
-              <h2 className="text-xl font-semibold">Thank you for connecting with us!</h2>
-              <p className="mt-2 text-gray-600">We will get back to you shortly.</p>
+      {/* Popup */}
+      {showPopup && (
+        <div className="popup fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50">
+          <div className="popup-content bg-white p-6 rounded-lg shadow-lg">
+            <h2 className="text-xl font-bold mb-4">Free Consultancy</h2>
+            <p className="mb-4">Get in touch with us for a free consultation!</p>
+            <input
+              type="text"
+              name="name"
+              placeholder="Your Name"
+              className="w-full p-2 mb-2 border border-gray-300 rounded"
+              value={formData.name}
+              onChange={handlePopupChange}
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="Your Email"
+              className="w-full p-2 mb-2 border border-gray-300 rounded"
+              value={formData.email}
+              onChange={handlePopupChange}
+            />
+            <textarea
+              name="message"
+              placeholder="Your Message"
+              className="w-full p-2 mb-4 border border-gray-300 rounded"
+              value={formData.message}
+              onChange={handlePopupChange}
+            ></textarea>
+            <div className="flex justify-end">
+              <button
+                onClick={handlePopupSubmit}
+                className="bg-blue-500 text-white py-2 px-4 rounded mr-2"
+              >
+                Get Consultation
+              </button>
+              <button
+                onClick={handlePopupClose}
+                className="bg-red-500 text-white py-2 px-4 rounded"
+              >
+                Cancel
+              </button>
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </section>
   );
 };

@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
+import { HomeIcon, UserIcon, BriefcaseIcon, SparklesIcon, PhoneIcon } from '@heroicons/react/24/outline';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleMenuClick = () => {
+    setIsOpen(false); // Close the menu when a link is clicked
+  };
 
   return (
     <nav className="bg-white shadow-md fixed w-full top-0 z-10" style={{ backgroundImage: "url('/3757c30a762387b (2).jpg')" }}>
@@ -27,21 +32,51 @@ const Navbar = () => {
 
         {/* Navbar Links for Desktop */}
         <div className="hidden md:flex space-x-6">
-          <a href="#home" className="text-gray-600 hover:text-gray-800">Home</a>
-          <a href="#about" className="text-gray-600 hover:text-gray-800">About</a>
-          <a href="#services" className="text-gray-600 hover:text-gray-800">Services</a>
-          <a href="#projects" className="text-gray-600 hover:text-gray-800">Projects</a>
-          <a href="#contact" className="text-gray-600 hover:text-gray-800">Contact</a>
+          <a href="#home" className="flex items-center text-gray-600 hover:text-gray-800">
+            <HomeIcon className="w-5 h-5 mr-2" />
+            Home
+          </a>
+          <a href="#about" className="flex items-center text-gray-600 hover:text-gray-800">
+            <UserIcon className="w-5 h-5 mr-2" />
+            About
+          </a>
+          <a href="#services" className="flex items-center text-gray-600 hover:text-gray-800">
+            <BriefcaseIcon className="w-5 h-5 mr-2" />
+            Services
+          </a>
+          <a href="#projects" className="flex items-center text-gray-600 hover:text-gray-800">
+            <SparklesIcon className="w-5 h-5 mr-2" />
+            Projects
+          </a>
+          <a href="#contact" className="flex items-center text-gray-600 hover:text-gray-800">
+            <PhoneIcon className="w-5 h-5 mr-2" />
+            Contact
+          </a>
         </div>
       </div>
 
       {/* Mobile Menu Links */}
       <div className={`md:hidden ${isOpen ? "block" : "hidden"} bg-white shadow-lg`}>
-        <a href="#home" className="block px-4 py-2 text-gray-600 hover:bg-gray-200">Home</a>
-        <a href="#about" className="block px-4 py-2 text-gray-600 hover:bg-gray-200">About</a>
-        <a href="#services" className="block px-4 py-2 text-gray-600 hover:bg-gray-200">Services</a>
-        <a href="#projects" className="block px-4 py-2 text-gray-600 hover:bg-gray-200">Projects</a>
-        <a href="#contact" className="block px-4 py-2 text-gray-600 hover:bg-gray-200">Contact</a>
+        <a href="#home" onClick={handleMenuClick} className="flex items-center block px-4 py-2 text-gray-600 hover:bg-gray-200">
+          <HomeIcon className="w-5 h-5 mr-2" />
+          Home
+        </a>
+        <a href="#about" onClick={handleMenuClick} className="flex items-center block px-4 py-2 text-gray-600 hover:bg-gray-200">
+          <UserIcon className="w-5 h-5 mr-2" />
+          About
+        </a>
+        <a href="#services" onClick={handleMenuClick} className="flex items-center block px-4 py-2 text-gray-600 hover:bg-gray-200">
+          <BriefcaseIcon className="w-5 h-5 mr-2" />
+          Services
+        </a>
+        <a href="#projects" onClick={handleMenuClick} className="flex items-center block px-4 py-2 text-gray-600 hover:bg-gray-200">
+          <SparklesIcon className="w-5 h-5 mr-2" />
+          Projects
+        </a>
+        <a href="#contact" onClick={handleMenuClick} className="flex items-center block px-4 py-2 text-gray-600 hover:bg-gray-200">
+          <PhoneIcon className="w-5 h-5 mr-2" />
+          Contact
+        </a>
       </div>
     </nav>
   );
