@@ -6,65 +6,65 @@ import qrimg from "../components/Screenshot 2024-09-01 013008.png";
 const Footer = () => {
   return (
     <>
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
+      <footer className="bg-gray-900 text-white py-8">
+        <div className="container mx-auto flex flex-col md:flex-row md:justify-between items-center md:items-start">
           {/* Contact Details Section */}
-          <div className="text-center md:text-left">
-            <p className="text-2xl font-bold mb-6">Contact Us</p>
-            <div className="flex items-center mb-4 text-lg justify-center md:justify-start space-x-4">
-              <FaPhone className="text-2xl text-blue-500" /> 
+          <div className="flex flex-col items-center md:items-start text-center md:text-left mb-8 md:mb-0 md:mr-8">
+            <p className="text-xl font-bold mb-4">Contact Us</p>
+            <div className="flex items-center mb-4 text-base justify-center md:justify-start space-x-3">
+              <FaPhone className="text-xl text-blue-500" /> 
               <a href="tel:+918487958435" className="hover:underline">+91 8487958435</a>
             </div>
-            <div className="flex items-center mb-4 text-lg justify-center md:justify-start space-x-4">
-              <FaEnvelope className="text-2xl text-blue-500" /> 
+            <div className="flex items-center mb-4 text-base justify-center md:justify-start space-x-3">
+              <FaEnvelope className="text-xl text-blue-500" /> 
               <a href="mailto:bluecoreit1508@gmail.com" className="hover:underline">bluecoreit1508@gmail.com</a>
             </div>
-            <div className="flex items-center mb-6 text-lg justify-center md:justify-start space-x-4 flex-wrap">
-              <FaMapMarkerAlt className="text-2xl text-blue-500" />
-              <span className="flex-1 text-center md:text-left">3, Ajanta Society, Mahvirnagar, Himmatnagar</span>
+            <div className="flex items-center mb-6 text-base justify-center md:justify-start space-x-3">
+              <FaMapMarkerAlt className="text-xl text-blue-500" />
+              <span>3, Ajanta Society, Mahvirnagar, Himmatnagar</span>
             </div>
             <div className="flex justify-center md:justify-start mt-8">
-              <img src={qrimg} alt="QR Code for Bluecore IT" className="w-40 h-40 object-cover rounded-lg shadow-lg" />
+              <img src={qrimg} alt="QR Code for Bluecore IT" className="w-32 h-32 object-cover rounded-lg shadow-lg" />
             </div>
           </div>
 
           {/* Menu Section */}
-          <div className="text-center md:text-left">
-            <p className="text-2xl font-bold mb-6">Important Links</p>
-            <div className="flex flex-col items-center md:items-start space-y-6">
+          <div className="flex flex-col items-center md:items-start text-center md:text-left mb-8 md:mb-0 md:mr-8">
+            <p className="text-xl font-bold mb-4">Important Links</p>
+            <div className="flex flex-col md:flex-col items-center md:items-start space-y-4">
               <div className="flex items-center space-x-2">
-                <FaHome className="text-xl text-blue-500" />
-                <a href="#home" className="text-lg hover:text-blue-400">Home</a>
+                <FaHome className="text-lg text-blue-500" />
+                <a href="#home" className="text-base hover:text-blue-400">Home</a>
               </div>
               <div className="flex items-center space-x-2">
-                <FaUser className="text-xl text-blue-500" />
-                <a href="#about" className="text-lg hover:text-blue-400">About</a>
+                <FaUser className="text-lg text-blue-500" />
+                <a href="#about" className="text-base hover:text-blue-400">About</a>
               </div>
               <div className="flex items-center space-x-2">
-                <FaServicestack className="text-xl text-blue-500" />
-                <a href="#services" className="text-lg hover:text-blue-400">Services</a>
+                <FaServicestack className="text-lg text-blue-500" />
+                <a href="#services" className="text-base hover:text-blue-400">Services</a>
               </div>
               <div className="flex items-center space-x-2">
-                <FaProjectDiagram className="text-xl text-blue-500" />
-                <a href="#projects" className="text-lg hover:text-blue-400">Projects</a>
+                <FaProjectDiagram className="text-lg text-blue-500" />
+                <a href="#projects" className="text-base hover:text-blue-400">Projects</a>
               </div>
               <div className="flex items-center space-x-2">
-                <FaEnvelopeOpen className="text-xl text-blue-500" />
-                <a href="#contact" className="text-lg hover:text-blue-400">Contact</a>
+                <FaEnvelopeOpen className="text-lg text-blue-500" />
+                <a href="#contact" className="text-base hover:text-blue-400">Contact</a>
               </div>
             </div>
           </div>
 
           {/* Social Media Section */}
-          <div className="text-center md:text-left">
-            <p className="text-2xl font-bold mb-6">Follow Us</p>
-            <div className="flex flex-col items-center md:items-start space-y-6">
+          <div className="flex flex-col items-center md:items-start text-center md:text-left">
+            <p className="text-xl font-bold mb-4">Follow Us</p>
+            <div className="flex space-x-6">
               <motion.a 
                 href="https://www.linkedin.com/in/bluecore-it-094700324?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1 }}
-                className="text-gray-400 hover:text-white text-2xl"
+                className="text-gray-400 hover:text-white text-xl"
               >
                 <FaLinkedin />
               </motion.a>
@@ -73,7 +73,7 @@ const Footer = () => {
                 target="_blank" 
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1 }}
-                className="text-gray-400 hover:text-white text-2xl"
+                className="text-gray-400 hover:text-white text-xl"
               >
                 <FaFacebook />
               </motion.a>
@@ -82,7 +82,7 @@ const Footer = () => {
                 target="_blank" 
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1 }}
-                className="text-gray-400 hover:text-white text-2xl"
+                className="text-gray-400 hover:text-white text-xl"
               >
                 <FaInstagram />
               </motion.a>
@@ -91,7 +91,7 @@ const Footer = () => {
                 target="_blank" 
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1 }}
-                className="text-gray-400 hover:text-white text-2xl"
+                className="text-gray-400 hover:text-white text-xl"
               >
                 <FaReddit />
               </motion.a>
@@ -100,7 +100,7 @@ const Footer = () => {
                 target="_blank" 
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1 }}
-                className="text-gray-400 hover:text-white text-2xl"
+                className="text-gray-400 hover:text-white text-xl"
               >
                 <FaTwitter />
               </motion.a>
