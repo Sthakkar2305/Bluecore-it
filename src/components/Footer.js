@@ -7,103 +7,71 @@ const Footer = () => {
   return (
     <>
       <footer className="bg-gray-900 text-white py-12">
-        <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
-          {/* Contact Details Section */}
-          <div className="text-center md:text-left">
-            <p className="text-2xl font-bold mb-6">Contact Us</p>
-            <div className="flex items-center mb-4 text-lg justify-center md:justify-start space-x-4">
-              <FaPhone className="text-2xl text-blue-500" /> 
-              <a href="tel:+918487958435" className="hover:underline">+91 8487958435</a>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
+            
+            {/* Contact Details Section */}
+            <div className="text-center md:text-left">
+              <p className="text-2xl font-bold mb-6">Contact Us</p>
+              <div className="flex items-center mb-4 text-lg justify-center md:justify-start space-x-4">
+                <FaPhone className="text-2xl text-blue-500" /> 
+                <a href="tel:+918487958435" className="hover:underline">+91 8487958435</a>
+              </div>
+              <div className="flex items-center mb-4 text-lg justify-center md:justify-start space-x-4">
+                <FaEnvelope className="text-2xl text-blue-500" /> 
+                <a href="mailto:bluecoreit1508@gmail.com" className="hover:underline">bluecoreit1508@gmail.com</a>
+              </div>
+              <div className="flex items-start mb-6 text-lg justify-center md:justify-start space-x-4 flex-wrap">
+                <FaMapMarkerAlt className="text-2xl text-blue-500" />
+                <span className="text-center md:text-left">3, Ajanta Society, Mahvirnagar, Himmatnagar</span>
+              </div>
+              <div className="flex justify-center md:justify-start mt-8">
+                <img src={qrimg} alt="QR Code for Bluecore IT" className="w-32 h-32 md:w-40 md:h-40 object-cover rounded-lg shadow-lg" />
+              </div>
             </div>
-            <div className="flex items-center mb-4 text-lg justify-center md:justify-start space-x-4">
-              <FaEnvelope className="text-2xl text-blue-500" /> 
-              <a href="mailto:bluecoreit1508@gmail.com" className="hover:underline">bluecoreit1508@gmail.com</a>
-            </div>
-            <div className="flex items-center mb-6 text-lg justify-center md:justify-start space-x-4 flex-wrap">
-              <FaMapMarkerAlt className="text-2xl text-blue-500" />
-              <span className="flex-1 text-center md:text-left">3, Ajanta Society, Mahvirnagar, Himmatnagar</span>
-            </div>
-            <div className="flex justify-center md:justify-start mt-8">
-              <img src={qrimg} alt="QR Code for Bluecore IT" className="w-40 h-40 object-cover rounded-lg shadow-lg" />
-            </div>
-          </div>
 
-          {/* Menu Section */}
-          <div className="text-center md:text-left">
-            <p className="text-2xl font-bold mb-6">Important Links</p>
-            <div className="flex flex-col items-center md:items-start space-y-6">
-              <div className="flex items-center space-x-2">
-                <FaHome className="text-xl text-blue-500" />
-                <a href="#home" className="text-lg hover:text-blue-400">Home</a>
-              </div>
-              <div className="flex items-center space-x-2">
-                <FaUser className="text-xl text-blue-500" />
-                <a href="#about" className="text-lg hover:text-blue-400">About</a>
-              </div>
-              <div className="flex items-center space-x-2">
-                <FaServicestack className="text-xl text-blue-500" />
-                <a href="#services" className="text-lg hover:text-blue-400">Services</a>
-              </div>
-              <div className="flex items-center space-x-2">
-                <FaProjectDiagram className="text-xl text-blue-500" />
-                <a href="#projects" className="text-lg hover:text-blue-400">Projects</a>
-              </div>
-              <div className="flex items-center space-x-2">
-                <FaEnvelopeOpen className="text-xl text-blue-500" />
-                <a href="#contact" className="text-lg hover:text-blue-400">Contact</a>
+            {/* Menu Section */}
+            <div className="text-center md:text-left">
+              <p className="text-2xl font-bold mb-6">Important Links</p>
+              <div className="flex flex-col items-center md:items-start space-y-4">
+                {[
+                  { icon: <FaHome />, label: "Home", href: "#home" },
+                  { icon: <FaUser />, label: "About", href: "#about" },
+                  { icon: <FaServicestack />, label: "Services", href: "#services" },
+                  { icon: <FaProjectDiagram />, label: "Projects", href: "#projects" },
+                  { icon: <FaEnvelopeOpen />, label: "Contact", href: "#contact" }
+                ].map((item, index) => (
+                  <div key={index} className="flex items-center space-x-2">
+                    {item.icon}
+                    <a href={item.href} className="text-lg hover:text-blue-400">{item.label}</a>
+                  </div>
+                ))}
               </div>
             </div>
-          </div>
 
-          {/* Social Media Section */}
-          <div className="text-center md:text-left">
-            <p className="text-2xl font-bold mb-6">Follow Us</p>
-            <div className="flex flex-col items-center md:items-start space-y-6">
-              <motion.a 
-                href="https://www.linkedin.com/in/bluecore-it-094700324?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.1 }}
-                className="text-gray-400 hover:text-white text-2xl"
-              >
-                <FaLinkedin />
-              </motion.a>
-              <motion.a 
-                href="https://www.facebook.com/people/BlueCoreit/61565250418909/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.1 }}
-                className="text-gray-400 hover:text-white text-2xl"
-              >
-                <FaFacebook />
-              </motion.a>
-              <motion.a 
-                href="https://www.instagram.com/bluecore_it" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.1 }}
-                className="text-gray-400 hover:text-white text-2xl"
-              >
-                <FaInstagram />
-              </motion.a>
-              <motion.a 
-                href="https://www.reddit.com/user/bluecore_it" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.1 }}
-                className="text-gray-400 hover:text-white text-2xl"
-              >
-                <FaReddit />
-              </motion.a>
-              <motion.a 
-                href="https://twitter.com/bluecore_it" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.1 }}
-                className="text-gray-400 hover:text-white text-2xl"
-              >
-                <FaTwitter />
-              </motion.a>
+            {/* Social Media Section */}
+            <div className="text-center md:text-left">
+              <p className="text-2xl font-bold mb-6">Follow Us</p>
+              <div className="flex flex-col items-center md:items-start space-y-4">
+                {[
+                  { icon: <FaLinkedin />, href: "https://www.linkedin.com/in/bluecore-it-094700324?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" },
+                  { icon: <FaFacebook />, href: "https://www.facebook.com/people/BlueCoreit/61565250418909/" },
+                  { icon: <FaInstagram />, href: "https://www.instagram.com/bluecore_it" },
+                  { icon: <FaReddit />, href: "https://www.reddit.com/user/bluecore_it" },
+                  { icon: <FaTwitter />, href: "https://twitter.com/bluecore_it" }
+                ].map((item, index) => (
+                  <motion.a 
+                    key={index}
+                    href={item.href} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.1 }}
+                    className="text-gray-400 hover:text-white text-2xl"
+                  >
+                    {item.icon}
+                  </motion.a>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -111,7 +79,7 @@ const Footer = () => {
 
       {/* Copyright Footer */}
       <footer className="bg-gray-800 text-white py-4">
-        <div className="container mx-auto text-center">
+        <div className="container mx-auto text-center px-4">
           <p className="text-sm">&copy; {new Date().getFullYear()} Bluecore IT. All rights reserved.</p>
         </div>
       </footer>
