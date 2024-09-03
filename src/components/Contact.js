@@ -20,36 +20,6 @@ const Contact = () => {
     });
   };
 
-  const handlePopupChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handlePopupOpen = () => {
-    setShowPopup(true);
-  };
-
-  const handlePopupClose = () => {
-    setShowPopup(false);
-  };
-
-  const handlePopupSubmit = () => {
-    const { name, email, message } = formData;
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    if (name.length >= 2 && emailPattern.test(email) && message.length > 0) {
-      setShowPopup(false);
-      document.getElementById("contact").scrollIntoView({ behavior: "smooth" });
-      document.getElementById("name").value = name;
-      document.getElementById("email").value = email;
-      document.getElementById("message").value = message;
-    } else {
-      alert("Please enter a valid name, email address, and message.");
-    }
-  };
-
   const sendEmail = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -216,55 +186,6 @@ const Contact = () => {
           </motion.button>
         </motion.form>
       </div>
-
-      {/* Popup */}
-      {showPopup && (
-        <div className="popup fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
-          <div className="popup-content bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
-            <h2 className="text-xl font-semibold mb-4 text-gray-800">Free Consultancy</h2>
-            <p className="text-gray-600 mb-4">
-              Get in touch with us for a free consultation! Fill out the form below or contact us directly for more information.
-            </p>
-            <input
-              type="text"
-              name="name"
-              placeholder="Your Name"
-              className="w-full p-2 mb-2 border border-gray-300 rounded"
-              value={formData.name}
-              onChange={handlePopupChange}
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder="Your Email"
-              className="w-full p-2 mb-2 border border-gray-300 rounded"
-              value={formData.email}
-              onChange={handlePopupChange}
-            />
-            <textarea
-              name="message"
-              placeholder="Your Message"
-              className="w-full p-2 mb-4 border border-gray-300 rounded"
-              value={formData.message}
-              onChange={handlePopupChange}
-            ></textarea>
-            <div className="flex justify-end">
-              <button
-                onClick={handlePopupSubmit}
-                className="bg-blue-500 text-white py-2 px-4 rounded mr-2"
-              >
-                Get Consultation
-              </button>
-              <button
-                onClick={handlePopupClose}
-                className="bg-red-500 text-white py-2 px-4 rounded"
-              >
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Thank You Popup */}
       {showThankYou && (
